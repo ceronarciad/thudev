@@ -54,11 +54,21 @@ class BankController extends AppBaseController
      */
     public function store(CreateBankRequest $request)
     {
-        $input = $request->all();
+        //$input = $request->all();
 
-        $bank = $this->bankRepository->create($input);
+        $isActive = null;
 
-        Flash::success('Bank saved successfully.');
+        if($request->isActive == TRUE){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
+        
+        $bank = $this->bankRepository->create($request->merge(['isActive' => $isActive])->all());
+
+        // $bank = $this->bankRepository->create($input);
+
+        Flash::success('¡Banco guardado con exito!');
 
         return redirect(route('banks.index'));
     }
@@ -75,7 +85,7 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('Bank not found');
+            Flash::error('El Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
@@ -95,7 +105,7 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('Bank not found');
+            Flash::error('El Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
@@ -115,15 +125,24 @@ class BankController extends AppBaseController
     {
         $bank = $this->bankRepository->find($id);
 
+        $isActive = null;
+
+        if($request->isActive == true || $request->isActive == "on"){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
+        
+    
         if (empty($bank)) {
-            Flash::error('Bank not found');
+            Flash::error('El Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
 
-        $bank = $this->bankRepository->update($request->all(), $id);
+        $bank = $this->bankRepository->update($request->merge(['isActive' => $isActive])->all(), $id);
 
-        Flash::success('Bank updated successfully.');
+        Flash::success('¡Banco actualizado con exito!');
 
         return redirect(route('banks.index'));
     }
@@ -142,14 +161,14 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('Bank not found');
+            Flash::error('El Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
 
         $this->bankRepository->delete($id);
 
-        Flash::success('Bank deleted successfully.');
+        Flash::success('¡Banco eliminado con exito!');
 
         return redirect(route('banks.index'));
     }

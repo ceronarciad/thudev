@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string name
  * @property string description
  * @property string code
- * @property checkbox isActive
+ * @property boolean isActive
  */
 class Bank extends Model
 {
@@ -41,7 +41,8 @@ class Bank extends Model
         'id' => 'integer',
         'name' => 'string',
         'description' => 'string',
-        'code' => 'string'
+        'code' => 'string',
+        'isActive' => 'boolean'
     ];
 
     /**
@@ -52,8 +53,7 @@ class Bank extends Model
     public static $rules = [
         'name' => 'required',
         'description' => 'required',
-        'code' => 'required',
-        'isActive' => 'required'
+        'code' => 'required'
     ];
 
     

@@ -1,6 +1,6 @@
-<li class="nav-item {{ Request::is('addresses*') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ Request::is('addresses*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('addresses.index') !!}"><i class="nav-icon icon-location-pin"></i><span>Direcciones</span></a>
-</li>
+</li> --}}
 <li class="nav-item {{ Request::is('banks*') ? 'active' : '' }}">
     <a class="nav-link" href="{!! route('banks.index') !!}"><i class="nav-icon icon-credit-card"></i><span>Bancos</span></a>
 </li>
