@@ -19,3 +19,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('addresses', 'AddressesController');
+
+Route::resource('banks', 'BankController');
+
+Route::resource('sellers', 'SellerController');
+
+Route::resource('categories', 'CategoriesController');
+
+Route::resource('products', 'ProductController');
+
+Route::resource('booklets', 'BookletController');
