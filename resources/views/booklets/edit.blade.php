@@ -3,9 +3,9 @@
 @section('content')
     <ol class="breadcrumb">
           <li class="breadcrumb-item">
-             <a href="{!! route('booklets.index') !!}">Booklet</a>
+             <a href="{!! route('booklets.index') !!}">Catalogos</a>
           </li>
-          <li class="breadcrumb-item active">Edit</li>
+          <li class="breadcrumb-item active">Actualizar</li>
         </ol>
     <div class="container-fluid">
          <div class="animated fadeIn">
@@ -15,7 +15,7 @@
                       <div class="card">
                           <div class="card-header">
                               <i class="fa fa-edit fa-lg"></i>
-                              <strong>Edit Booklet</strong>
+                              <strong>Actualizar Catalogo</strong>
                           </div>
                           <div class="card-body">
                               {!! Form::model($booklet, ['route' => ['booklets.update', $booklet->id], 'method' => 'patch']) !!}

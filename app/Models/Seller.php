@@ -77,8 +77,7 @@ class Seller extends Model
         'bank' => 'required',
         'address' => 'required',
         'bank_account' => 'required',
-        'bank_number_clabe' => 'required',
-        'isActive' => 'required'
+        'bank_number_clabe' => 'required'
     ];
 
     

@@ -54,11 +54,19 @@ class BookletController extends AppBaseController
      */
     public function store(CreateBookletRequest $request)
     {
-        $input = $request->all();
+        //$input = $request->all();
 
-        $booklet = $this->bookletRepository->create($input);
+        $isActive = null;
 
-        Flash::success('Booklet saved successfully.');
+        if($request->isActive == TRUE){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
+
+        $booklet = $this->bookletRepository->create($request->merge(['isActive' => $isActive])->all());
+
+        Flash::success('¡Catalogo guardado exitosamente!');
 
         return redirect(route('booklets.index'));
     }
@@ -75,7 +83,7 @@ class BookletController extends AppBaseController
         $booklet = $this->bookletRepository->find($id);
 
         if (empty($booklet)) {
-            Flash::error('Booklet not found');
+            Flash::error('Catalogo no encontrado');
 
             return redirect(route('booklets.index'));
         }
@@ -95,7 +103,7 @@ class BookletController extends AppBaseController
         $booklet = $this->bookletRepository->find($id);
 
         if (empty($booklet)) {
-            Flash::error('Booklet not found');
+            Flash::error('Catalogo no encontrado');
 
             return redirect(route('booklets.index'));
         }
@@ -114,16 +122,23 @@ class BookletController extends AppBaseController
     public function update($id, UpdateBookletRequest $request)
     {
         $booklet = $this->bookletRepository->find($id);
+        $isActive = null;
 
         if (empty($booklet)) {
-            Flash::error('Booklet not found');
+            Flash::error('Catalogo no encontrado');
 
             return redirect(route('booklets.index'));
         }
 
-        $booklet = $this->bookletRepository->update($request->all(), $id);
+        if($request->isActive == true || $request->isActive == "on"){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        Flash::success('Booklet updated successfully.');
+        $booklet = $this->bookletRepository->update($request->merge(['isActive' => $isActive])->all(), $id);
+
+        Flash::success('¡Catalogo actualizado exitosamente!');
 
         return redirect(route('booklets.index'));
     }
@@ -142,14 +157,14 @@ class BookletController extends AppBaseController
         $booklet = $this->bookletRepository->find($id);
 
         if (empty($booklet)) {
-            Flash::error('Booklet not found');
+            Flash::error('Catalogo no encontrado');
 
             return redirect(route('booklets.index'));
         }
 
         $this->bookletRepository->delete($id);
 
-        Flash::success('Booklet deleted successfully.');
+        Flash::success('¡Catalogo eliminado exitosamente!');
 
         return redirect(route('booklets.index'));
     }

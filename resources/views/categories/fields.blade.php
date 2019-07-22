@@ -1,19 +1,26 @@
-<!-- Name Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('name', 'Nombre:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+<div class="row">
+    <!-- Name Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('name', 'Nombre:') !!}
+        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
-<!-- Description Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('description', 'Descripción:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+
+<div class="row">
+    <!-- Description Field -->
+    <div class="form-group col-sm-12 col-lg-12">
+        {!! Form::label('description', 'Descripción:') !!}
+        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    </div>
 </div>
 
-<!-- IsActive Field -->
-<div class="form-check col-sm-6">
-    {!! Form::label('isActive', '¿Es Activo? ') !!}
-    {!! Form::checkbox('isActive', true) !!}
+<div class="row">
+    <!-- IsActive Field -->
+    <div class="form-check col-sm-6">
+        {!! Form::label('isActive', '¿Es Activo? ') !!}
+        {!! Form::checkbox('isActive', true) !!}
+    </div>
 </div>
 <br>
 

@@ -54,12 +54,18 @@ class CategoriesController extends AppBaseController
      */
     public function store(CreateCategoriesRequest $request)
     {
-        $input = $request->all();
+        
+        $isActive = null;
 
-        $categories = $this->categoriesRepository->create($input);
+        if($request->isActive == TRUE){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        Flash::success('Categories saved successfully.');
+        $categories = $this->categoriesRepository->create($request->merge(['isActive' => $isActive])->all());
 
+        Flash::success('¡Categoria guardada exitosamente!');
         return redirect(route('categories.index'));
     }
 
@@ -75,7 +81,7 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error('Categoria no encontrada');
 
             return redirect(route('categories.index'));
         }
@@ -95,7 +101,7 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error('Categoria no encontrada');
 
             return redirect(route('categories.index'));
         }
@@ -114,16 +120,23 @@ class CategoriesController extends AppBaseController
     public function update($id, UpdateCategoriesRequest $request)
     {
         $categories = $this->categoriesRepository->find($id);
+        $isActive = null;
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error('Categoria no encontrada');
 
             return redirect(route('categories.index'));
         }
 
-        $categories = $this->categoriesRepository->update($request->all(), $id);
+        if($request->isActive == TRUE){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        Flash::success('Categories updated successfully.');
+        $categories = $this->categoriesRepository->update($request->merge(['isActive' => $isActive])->all(), $id);
+
+        Flash::success('¡Categoria actualizada exitosamente!');
 
         return redirect(route('categories.index'));
     }
@@ -142,14 +155,14 @@ class CategoriesController extends AppBaseController
         $categories = $this->categoriesRepository->find($id);
 
         if (empty($categories)) {
-            Flash::error('Categories not found');
+            Flash::error('Categoria no encontrada');
 
             return redirect(route('categories.index'));
         }
 
         $this->categoriesRepository->delete($id);
 
-        Flash::success('Categories deleted successfully.');
+        Flash::success('¡Categoria eliminada exitosamente!');
 
         return redirect(route('categories.index'));
     }

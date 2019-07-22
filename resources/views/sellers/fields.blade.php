@@ -56,9 +56,6 @@
 </div>
 
 
-
-
-
 <!-- Address Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('address', 'Dirección:') !!}
@@ -66,18 +63,25 @@
 </div>
 
 
-
-
-
-<!-- IsActive Field -->
-<div class="form-check col-sm-6">
-    {!! Form::label('isActive', '¿Es Activo? ') !!}
-    {!! Form::checkbox('isActive', true) !!}
+<div class="row justify-content-md-center">
+    <div class="col-sm-2">
+        <!-- IsActive Field -->
+        <div class="form-group">
+                {!! Form::label('isActive', '¿Es Activo? ') !!}
+            <div class="form-check">
+                <label class="switch switch-pill switch-primary">
+                {!! Form::checkbox('isActive',null) !!}
+                </label>
+            </div>
+        </div>  
+    </div>    
 </div>
+
+
 <br>
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('sellers.index') !!}" class="btn btn-default">Cancel</a>
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('sellers.index') !!}" class="btn btn-default">Cancelar</a>
 </div>

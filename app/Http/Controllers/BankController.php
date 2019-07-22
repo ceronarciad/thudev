@@ -68,7 +68,7 @@ class BankController extends AppBaseController
 
         // $bank = $this->bankRepository->create($input);
 
-        Flash::success('¡Banco guardado con exito!');
+        Flash::success('¡Banco guardado exitosamente!');
 
         return redirect(route('banks.index'));
     }
@@ -85,7 +85,7 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('El Banco no encontrado');
+            Flash::error('Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
@@ -105,7 +105,7 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('El Banco no encontrado');
+            Flash::error('Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
@@ -125,24 +125,23 @@ class BankController extends AppBaseController
     {
         $bank = $this->bankRepository->find($id);
 
-        $isActive = null;
+        $isActive = null;        
+    
+        if (empty($bank)) {
+            Flash::error('Banco no encontrado');
 
+            return redirect(route('banks.index'));
+        }
+        
         if($request->isActive == true || $request->isActive == "on"){
             $isActive = 1;
         }else{
             $isActive = 0;
         }
-        
-    
-        if (empty($bank)) {
-            Flash::error('El Banco no encontrado');
-
-            return redirect(route('banks.index'));
-        }
 
         $bank = $this->bankRepository->update($request->merge(['isActive' => $isActive])->all(), $id);
 
-        Flash::success('¡Banco actualizado con exito!');
+        Flash::success('¡Banco actualizado exitosamente!');
 
         return redirect(route('banks.index'));
     }
@@ -161,14 +160,14 @@ class BankController extends AppBaseController
         $bank = $this->bankRepository->find($id);
 
         if (empty($bank)) {
-            Flash::error('El Banco no encontrado');
+            Flash::error('Banco no encontrado');
 
             return redirect(route('banks.index'));
         }
 
         $this->bankRepository->delete($id);
 
-        Flash::success('¡Banco eliminado con exito!');
+        Flash::success('¡Banco eliminado exitosamente!');
 
         return redirect(route('banks.index'));
     }

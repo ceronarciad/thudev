@@ -54,12 +54,20 @@ class SellerController extends AppBaseController
      */
     public function store(CreateSellerRequest $request)
     {
-        $input = $request->all();
+        //$input = $request->all();
+        
+        $isActive = null;
 
-        $seller = $this->sellerRepository->create($input);
+        if($request->isActive == TRUE){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        Flash::success('Seller saved successfully.');
+    
+        $seller = $this->sellerRepository->create($request->merge(['isActive' => $isActive])->all());
 
+        Flash::success('¡Proveedor guardado exitosamente!');
         return redirect(route('sellers.index'));
     }
 
@@ -75,7 +83,7 @@ class SellerController extends AppBaseController
         $seller = $this->sellerRepository->find($id);
 
         if (empty($seller)) {
-            Flash::error('Seller not found');
+            Flash::error('Proveedor no encontrado');
 
             return redirect(route('sellers.index'));
         }
@@ -95,7 +103,7 @@ class SellerController extends AppBaseController
         $seller = $this->sellerRepository->find($id);
 
         if (empty($seller)) {
-            Flash::error('Seller not found');
+            Flash::error('Proveedor no encontrado');
 
             return redirect(route('sellers.index'));
         }
@@ -113,17 +121,25 @@ class SellerController extends AppBaseController
      */
     public function update($id, UpdateSellerRequest $request)
     {
-        $seller = $this->sellerRepository->find($id);
+        $seller = $this->sellerRepository->find($id);      
+        $isActive = null; 
 
         if (empty($seller)) {
-            Flash::error('Seller not found');
+            Flash::error('Proveedor no encontrado');
 
             return redirect(route('sellers.index'));
         }
 
-        $seller = $this->sellerRepository->update($request->all(), $id);
+        if($request->isActive == true || $request->isActive == "on"){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        Flash::success('Seller updated successfully.');
+        $seller = $this->sellerRepository->update($request->merge(['isActive' => $isActive])->all(), $id);
+
+
+        Flash::success('¡Proveedor actualizado exitosamente!');
 
         return redirect(route('sellers.index'));
     }
@@ -142,14 +158,14 @@ class SellerController extends AppBaseController
         $seller = $this->sellerRepository->find($id);
 
         if (empty($seller)) {
-            Flash::error('Seller not found');
+            Flash::error('Proveedor no encontrado');
 
             return redirect(route('sellers.index'));
         }
 
         $this->sellerRepository->delete($id);
 
-        Flash::success('Seller deleted successfully.');
+        Flash::success('¡Proveedor eliminado exitosamente!');
 
         return redirect(route('sellers.index'));
     }

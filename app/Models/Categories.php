@@ -49,8 +49,7 @@ class Categories extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'description' => 'required',
-        'isActive' => 'required'
+        'description' => 'required'
     ];
 
     

@@ -16,7 +16,7 @@
     <!-- Url Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('url', 'URL') !!}
-        {!! Form::text('url', null, ['class' => 'form-control']) !!}
+        {!! Form::url('url', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 
@@ -27,6 +27,22 @@
         {!! Form::textarea('code_html', null, ['class' => 'form-control']) !!}
     </div>
 </div>
+
+
+<div class="row justify-content-md-center">
+        <div class="col-sm-2">
+            <!-- IsActive Field -->
+            <div class="form-group">
+                    {!! Form::label('isActive', '¿Es Activo? ') !!}
+                <div class="form-check">
+                    <label class="switch switch-pill switch-primary">
+                    {!! Form::checkbox('isActive',null) !!}
+                    </label>
+                </div>
+            </div>  
+        </div>    
+</div>
+
 
 <div class="row">
     <!-- Submit Field -->

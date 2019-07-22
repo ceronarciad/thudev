@@ -57,8 +57,7 @@ class Booklet extends Model
         'name' => 'required',
         'code' => 'required',
         'url' => 'required',
-        'code_html' => 'required',
-        'isActive' => 'required'
+        'code_html' => 'required'   
     ];
 
     
