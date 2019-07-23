@@ -76,12 +76,9 @@ class Product extends Model
         'short_description' => 'required',
         'description' => 'required',
         'price' => 'required',
-        'discount_price' => 'required',
-        'discount_percent' => 'required',
         'stock' => 'required',
         'category' => 'required',
         'hasDiscount' => 'required',
-        'isActive' => 'required'
     ];
 
     

@@ -58,7 +58,7 @@ class SellerController extends AppBaseController
         
         $isActive = null;
 
-        if($request->isActive == TRUE){
+        if($request->isActive == true || $request->isActive == "on"){
             $isActive = 1;
         }else{
             $isActive = 0;

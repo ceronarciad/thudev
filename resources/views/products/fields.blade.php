@@ -24,7 +24,6 @@
         {!! Form::label('category', 'Categoria:') !!}
         {!! Form::number('category', null, ['class' => 'form-control']) !!}
     </div>
-    
 </div>
 
 
@@ -60,7 +59,7 @@
     <!-- Discount Price Field -->
     <div class="form-group col-sm-3">
         {!! Form::label('discount_price', 'Precio de Descuento:') !!}
-        {!! Form::number('discount_price', null, ['class' => 'form-control', 'disabled' => 'true']) !!}
+        {!! Form::number('discount_price', null, ['class' => 'form-control']) !!}
     </div>
     
     <!-- Stock Field -->
@@ -71,13 +70,24 @@
 
 </div>    
 
-
+<br>
 
 <!-- IsActive Field -->
-<div class="form-check col-sm-6">
-        {!! Form::label('isActive', '¿Es Activo? ') !!}
-        {!! Form::checkbox('isActive', true) !!}
+<div class="row justify-content-md-center">
+    <div class="col-sm-2">
+        <!-- IsActive Field -->
+        <div class="form-group">
+                {!! Form::label('isActive', '¿Es Activo? ') !!}
+            <div class="form-check">
+                <label class="switch switch-pill switch-primary">
+                {!! Form::checkbox('isActive',null) !!}
+                </label>
+            </div>
+        </div>  
+    </div>    
 </div>
+
+
     <br>
 
 <!-- Submit Field -->

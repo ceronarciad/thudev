@@ -55,10 +55,24 @@ class ProductController extends AppBaseController
     public function store(CreateProductRequest $request)
     {
         $input = $request->all();
+        $isActive = null;
+        $hasDiscount = null;
+        
+        if($request->isActive == true || $request->isActive == "on"){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        $product = $this->productRepository->create($input);
+        if($request->hasDiscount == true || $request->hasDiscount == "on"){
+            $hasDiscount = 1;
+        }else{
+            $hasDiscount = 0;
+        }
 
-        Flash::success('Product saved successfully.');
+        $product = $this->productRepository->create($request->merge(['hasDiscount' => $hasDiscount, 'isActive' => $isActive])->all());
+
+        Flash::success('¡Producto guardado exitosamente!');
 
         return redirect(route('products.index'));
     }
@@ -75,7 +89,7 @@ class ProductController extends AppBaseController
         $product = $this->productRepository->find($id);
 
         if (empty($product)) {
-            Flash::error('Product not found');
+            Flash::error('Producto no encontrado');
 
             return redirect(route('products.index'));
         }
@@ -95,7 +109,7 @@ class ProductController extends AppBaseController
         $product = $this->productRepository->find($id);
 
         if (empty($product)) {
-            Flash::error('Product not found');
+            Flash::error('Producto no encontrado');
 
             return redirect(route('products.index'));
         }
@@ -114,16 +128,30 @@ class ProductController extends AppBaseController
     public function update($id, UpdateProductRequest $request)
     {
         $product = $this->productRepository->find($id);
+        $isActive = null;
+        $hasDiscount = null;
 
         if (empty($product)) {
-            Flash::error('Product not found');
+            Flash::error('Producto no encontrado');
 
             return redirect(route('products.index'));
         }
+                
+        if($request->isActive == true || $request->isActive == "on"){
+            $isActive = 1;
+        }else{
+            $isActive = 0;
+        }
 
-        $product = $this->productRepository->update($request->all(), $id);
+        if($request->hasDiscount == true || $request->hasDiscount == "on"){
+            $hasDiscount = 1;
+        }else{
+            $hasDiscount = 0;
+        }
+        $product = $this->productRepository->update($request->merge(['hasDiscount' => $hasDiscount, 'isActive' => $isActive])->all(), $id);
 
-        Flash::success('Product updated successfully.');
+
+        Flash::success('¡Producto acutalizado exitosamente!');
 
         return redirect(route('products.index'));
     }
@@ -142,14 +170,14 @@ class ProductController extends AppBaseController
         $product = $this->productRepository->find($id);
 
         if (empty($product)) {
-            Flash::error('Product not found');
+            Flash::error('Producto no encontrado');
 
             return redirect(route('products.index'));
         }
 
         $this->productRepository->delete($id);
 
-        Flash::success('Product deleted successfully.');
+        Flash::success('¡Producto eliminado exitosamente!');
 
         return redirect(route('products.index'));
     }
